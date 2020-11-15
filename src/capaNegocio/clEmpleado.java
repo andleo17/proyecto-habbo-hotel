@@ -91,6 +91,16 @@ public class clEmpleado {
     }
      
     public void modificarEmpleado(String dni, String nom , String ape , String fecha, String sex,String dire , String tel , Boolean vig) throws Exception{
+        /*
+        create or replace function ModificarEmpleado
+        (dni varchar(8),nom varchar(30) , ape varchar(60) , fecha date, sex Boolean , dire varchar(50) , tel varchar(11), vig Boolean) returns void as
+        $$
+        declare
+        begin
+            update empleado set nombres=nom,apellidos=ape,fechanac=fecha,sexo=sex,direccion=dire,telefono=tel,vigencia=vig where dniemp=dni;
+        end;
+        $$language'plpgsql'
+        */
         boolean s;
         if(sex.equalsIgnoreCase("Masculino")){
             s=true;
@@ -98,7 +108,8 @@ public class clEmpleado {
             s=false;
         }
         try {
-            strSQL = "update empleado set nombres='"+nom+"',apellidos='"+ape+"',fechanac='"+fecha+"',sexo='"+s+"',direccion='"+dire+"',telefono='"+tel+"',vigencia='"+vig+"' where dniemp='"+dni+"'";
+            //strSQL = "update empleado set nombres='"+nom+"',apellidos='"+ape+"',fechanac='"+fecha+"',sexo='"+s+"',direccion='"+dire+"',telefono='"+tel+"',vigencia='"+vig+"' where dniemp='"+dni+"'";
+            strSQL = "select ModificarEmpleado('"+nom+"','"+ape+"','"+fecha+"','"+s+"','"+dire+"','"+tel+"','"+vig+"','"+dni+"');";
             objConectar.conectar();
             con = objConectar.getConnection();
             objConectar.ejecutarBD(strSQL);

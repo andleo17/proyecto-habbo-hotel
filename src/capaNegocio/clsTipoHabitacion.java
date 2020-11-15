@@ -87,10 +87,20 @@ public class clsTipoHabitacion {
     }
     
     public void modificartipohab(Integer cod, String nom ,String des , double prec, Boolean vig ) throws Exception {
+        /*
+        create or replace function ModificarTipoHabitacion(cod int, nom varchar(30), des varchar(100) , prec float, vig Boolean ) returns void as
+        $$
+        declare
+        begin
+            update tipo_habitacion set nombre=nom, descripcion=des,precio=prec, vigencia=vig where codigoth=cod;
+        end;
+        $$language'plpgsql'
+        */
         try {
             objConectar.conectar();
             con = objConectar.getConnection();
-            CallableStatement sentencia = con.prepareCall("update tipo_habitacion set nombre=?, descripcion=?,precio=?, vigencia=? where codigoth=?");
+            //update tipo_habitacion set nombre=?, descripcion=?,precio=?, vigencia=? where codigoth=?
+            CallableStatement sentencia = con.prepareCall("select MidificarTipoHabitacion(?,?,?,?,?);");
             sentencia.setString(1, nom);
             sentencia.setString(2, des);
             sentencia.setDouble(3, prec);
@@ -119,6 +129,19 @@ public class clsTipoHabitacion {
             objConectar.conectar();
             con = objConectar.getConnection();
             CallableStatement sentencia = con.prepareCall("select * from tipo_habitacion");
+            rs= sentencia.executeQuery();
+            return rs;
+        } catch (Exception e) {
+            throw new Exception("Error al listar: "+e.getMessage());
+        }
+    }
+    
+    public ResultSet listartipohabcbo(int num) throws Exception { 
+        try {
+            objConectar.conectar();
+            con = objConectar.getConnection();
+            CallableStatement sentencia = con.prepareCall("select tipo_habitacion.nombre from tipo_habitacion inner join habitacion on habitacion.codigoth=tipo_habitacion.codigoth where numerohab=? ");
+            sentencia.setInt(1, num);
             rs= sentencia.executeQuery();
             return rs;
         } catch (Exception e) {

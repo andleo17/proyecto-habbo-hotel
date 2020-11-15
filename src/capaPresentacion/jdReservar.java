@@ -10,6 +10,8 @@ import capaNegocio.clsReserva;
 import capaNegocio.clsTipoHabitacion;
 import com.toedter.calendar.JDateChooser;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +31,8 @@ public class jdReservar extends javax.swing.JDialog {
     clsHuesped objHuesped = new clsHuesped();
     clsReserva objReserva = new clsReserva();
     clsTipoHabitacion objTipoHabitacion = new clsTipoHabitacion();
-   JDateChooser dateChooser = new JDateChooser("yyyy/MM/dd", "####/##/##", '_');
+    JDateChooser dateChooser = new JDateChooser("yyyy/MM/dd", "####/##/##", '_');
+    SimpleDateFormat formato_del_Texto = new SimpleDateFormat("dd-MM-yyyy");
     
     public jdReservar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -493,6 +496,7 @@ public class jdReservar extends javax.swing.JDialog {
         // Registrar reserva
         try {
             objReserva.registarReserva(Integer.parseInt(txtReserva.getText()),dtInicio.getDate(), dtFin.getDate(), chkEstado.isSelected(), chkConfirmación.isSelected(), txtPago.getText(), Integer.parseInt(cboHab.getSelectedItem().toString()), txtDni.getText(),txtDniE.getText());
+            JOptionPane.showMessageDialog(this, "Reserva Registrada");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -502,6 +506,8 @@ public class jdReservar extends javax.swing.JDialog {
         // Modificar Reserva
         try {
             objReserva.modificarReserva(Integer.parseInt(txtReserva.getText()),dtInicio.getDate(), dtFin.getDate(), chkEstado.isSelected(), chkConfirmación.isSelected(), txtPago.getText(), Integer.parseInt(cboHab.getSelectedItem().toString()), txtDni.getText(),txtDniE.getText());
+            JOptionPane.showMessageDialog(this, "Modificación exitosa");
+            listarReservas();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -528,8 +534,15 @@ public class jdReservar extends javax.swing.JDialog {
     private void tblReservaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblReservaMouseClicked
         //Llenar los datos al presionar una fila
         txtReserva.setText(String.valueOf(tblReserva.getValueAt(tblReserva.getSelectedRow(), 0)));
-        dtInicio.setDate((java.util.Date) (tblReserva.getValueAt(tblReserva.getSelectedRow(), 1)));
-        dtFin.setDate((java.util.Date) (tblReserva.getValueAt(tblReserva.getSelectedRow(), 2)));
+        
+        try {
+            //System.out.println(tblReserva.getValueAt(tblReserva.getSelectedRow(), 1));
+            //dtInicio.setDate((java.util.Date) (tblReserva.getValueAt(tblReserva.getSelectedRow(), 1)));
+            dtInicio.setDate(formato_del_Texto.parse((String) tblReserva.getValueAt(tblReserva.getSelectedRow(), 1)));
+            dtFin.setDate(formato_del_Texto.parse((String) tblReserva.getValueAt(tblReserva.getSelectedRow(), 2)));
+        } catch (ParseException ex) {
+            Logger.getLogger(jdReservar.class.getName()).log(Level.SEVERE, null, ex);
+        }
         if(String.valueOf(tblReserva.getValueAt(tblReserva.getSelectedRow(), 3)).equals("Vigente")){
             chkEstado.setSelected(true);
         }else{
@@ -541,18 +554,18 @@ public class jdReservar extends javax.swing.JDialog {
         }else{
             chkConfirmación.setSelected(false);
         }
-
+        txtPago.setText(String.valueOf(tblReserva.getValueAt(tblReserva.getSelectedRow(), 5)));
+        cboHab.setSelectedItem(String.valueOf(tblReserva.getValueAt(tblReserva.getSelectedRow(), 6)));
         try { //Para colocar el tipo de la habitacion
-            String t = objTipoHabitacion.BuscarTipoxHab(Integer.parseInt(String.valueOf(tblReserva.getValueAt(tblReserva.getSelectedRow(), 5))));
-            cboTipo.setSelectedItem(t);
+            listarTipoHabitacionCbox(Integer.parseInt((String) tblReserva.getValueAt(tblReserva.getSelectedRow(), 6)));
         } catch (Exception ex) {
             Logger.getLogger(jdReservar.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        cboHab.setSelectedItem(String.valueOf(tblReserva.getValueAt(tblReserva.getSelectedRow(), 5)));
-        txtDni.setText(String.valueOf(tblReserva.getValueAt(tblReserva.getSelectedRow(), 6)));
+        
+        
+        txtDni.setText(String.valueOf(tblReserva.getValueAt(tblReserva.getSelectedRow(), 7)));
         btnBuscarActionPerformed(null);
-        txtDniE.setText(String.valueOf(tblReserva.getValueAt(tblReserva.getSelectedRow(), 7)));
+        txtDniE.setText(String.valueOf(tblReserva.getValueAt(tblReserva.getSelectedRow(), 8)));
 
     }//GEN-LAST:event_tblReservaMouseClicked
 
@@ -619,6 +632,23 @@ public class jdReservar extends javax.swing.JDialog {
         
     }
     
+    public void listarTipoHabitacionCbox(int i) {
+    ResultSet rs=null;
+        try {
+            DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+            rs=objTipoHabitacion.listartipohabcbo(i);
+            while(rs.next()){
+                modelo.addElement(rs.getString("nombre"));
+            }
+            cboTipo.setModel(modelo);
+            cboTipo.setSelectedIndex(0);
+            
+        } catch (Exception e) {
+            JOptionPane.showConfirmDialog(this, e.getMessage());
+        }
+        
+    }
+    
     public void listarHabitacionPorTipo(String tipo) {
     ResultSet rs=null;
         try {
@@ -664,6 +694,7 @@ public class jdReservar extends javax.swing.JDialog {
         modelo.addColumn("Fin");
         modelo.addColumn("Estado");
         modelo.addColumn("Confirmación");
+        modelo.addColumn("R.Pago");
         modelo.addColumn("Habitación");
         modelo.addColumn("Huesped");
         modelo.addColumn("Empleado");
@@ -679,9 +710,9 @@ public class jdReservar extends javax.swing.JDialog {
                 }
                 
                 if(rs.getBoolean("estado")){
-                   c="Vigente";
+                   es="Vigente";
                 }else{
-                    c="No Vigente";
+                    es="No Vigente";
                 }
                 
                 registro=new Vector();
@@ -691,8 +722,9 @@ public class jdReservar extends javax.swing.JDialog {
                 registro.add(3,es);
                 registro.add(4,c);
                 registro.add(5,rs.getString("referenciapago"));
-                registro.add(6,rs.getString("dnihue"));
-                registro.add(7,rs.getString("dniemp"));
+                registro.add(6,rs.getString("numerohab"));
+                registro.add(7,rs.getString("dnihue"));
+                registro.add(8,rs.getString("dniemp"));
                 modelo.addRow(registro);     
             }
             

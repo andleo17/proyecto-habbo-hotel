@@ -67,9 +67,9 @@ public class clsReserva {
         try {
             objConectar.conectar();
             con = objConectar.getConnection();
-            CallableStatement sentencia = con.prepareCall("update reserva set fechaini=?,fechafin=?,estado=?, confirmacion=?, referenciapago=?, numerohab=? dniemp=? where dnihue=? and cod=?");
-            sentencia.setDate(1, (java.sql.Date) ini);
-            sentencia.setDate(2, (java.sql.Date) fin);
+            CallableStatement sentencia = con.prepareCall("update reserva set fechaini=?,fechafin=?,estado=?, confirmacion=?, referenciapago=?, numerohab=?, dniemp=? where dnihue=? and numerores=?");
+            sentencia.setDate(1, new java.sql.Date(ini.getTime()));
+            sentencia.setDate(2, new java.sql.Date(fin.getTime()));
             sentencia.setBoolean(3, estado);
             sentencia.setBoolean(4, confirmacion);
             sentencia.setString(5, referencia);
@@ -87,7 +87,8 @@ public class clsReserva {
         try {
             objConectar.conectar();
             con = objConectar.getConnection();
-            CallableStatement sentencia = con.prepareCall("select* from Reserva where estado=true");
+            //select* from Reserva where estado=true
+            CallableStatement sentencia = con.prepareCall("select* from Reserva");
             rs = sentencia.executeQuery();
             return rs;
         } catch (Exception e) {

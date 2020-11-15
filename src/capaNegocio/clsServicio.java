@@ -107,10 +107,20 @@ public class clsServicio {
     }
     
     public void modificarServicio(int cod,String descripcion,float costo, int tipo) throws Exception{
+        /*
+        create or replace function ModificarServicio(cod int, des varchar (100), costo float, tipo int ) returns void as
+        $$
+        declare
+        begin
+            update servicio set descripcion=des, costototal=costo,codigots=tipo where codigoser=cod;
+        end;
+        $$language'plpgsql'
+        */
         try {
             objConectar.conectar();
             con = objConectar.getConnection();
-            CallableStatement sentencia = con.prepareCall("update servicio set descripcion=?, costototal=?,codigots=? where codigoser=?");
+            //update servicio set descripcion=?, costototal=?,codigots=? where codigoser=?
+            CallableStatement sentencia = con.prepareCall("select ModificarServicio(?,?,?,?);");
             sentencia.setString(1, descripcion);
             sentencia.setFloat(2, costo);
             sentencia.setInt(3, tipo);

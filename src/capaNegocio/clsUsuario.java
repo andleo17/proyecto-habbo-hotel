@@ -71,7 +71,17 @@ public class clsUsuario {
     }
     
     public void modificarContraseña(String usu, String nuevaCon) throws Exception{
-        strSQL = "update usuario set contrasena='" + nuevaCon + "' where nombreusu='" + usu + "'";
+        /*
+        create or replace function ModificarContraseña(usu varchar(30), con varchar(30)) returns void as
+        $$
+        declare
+        begin
+            update usuario set contrasena=usu where nombreusu=usu;
+        end;
+        $$language'plpgsql'
+        */
+        //update usuario set contrasena='" + nuevaCon + "' where nombreusu='" + usu + "'
+        strSQL = "select ModificarCotraseña('"+usu+"','"+nuevaCon+"')";
         objConectar.ejecutarBD(strSQL);
     }
 

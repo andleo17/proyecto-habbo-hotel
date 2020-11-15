@@ -73,10 +73,19 @@ public class clsTipoServi {
     
 
     public void modificartiposer(String cod, String nom ,String des , double prec, Boolean vig ) throws Exception {
+        /*
+        create or replace function ModificarTipoServicio(cod int, nom varchar(30) , des varchar(100) , prec float, vig Boolean ) returns void as
+        $$
+        declare
+        begin
+            update tipo_servicio set nombre=nom, descripcion=des,precio=prec, vigencia=vig where codigoth=cod;
+        end;
+        $$language'plpgsql'
+        */
         try {
             objConectar.conectar();
             con = objConectar.getConnection();
-            CallableStatement sentencia = con.prepareCall("update tipo_servicio set nombre=?, descripcion=?,precio=?, vigencia=? where codigots=?");
+            CallableStatement sentencia = con.prepareCall("select ModificarTipoServicio(?,?,?,?,?)");
             sentencia.setString(1, nom);
             sentencia.setString(2, des);
             sentencia.setDouble(3, prec);
