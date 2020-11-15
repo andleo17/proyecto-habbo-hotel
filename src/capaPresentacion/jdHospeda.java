@@ -394,6 +394,11 @@ public class jdHospeda extends javax.swing.JDialog {
 
         txtEmpleado.setEditable(false);
         txtEmpleado.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpleadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -408,7 +413,7 @@ public class jdHospeda extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtEmpleado)
-                        .addGap(84, 84, 84)
+                        .addGap(86, 86, 86)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblFecha)
@@ -592,6 +597,10 @@ public class jdHospeda extends javax.swing.JDialog {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnBuscarHospedajeActionPerformed
+
+    private void txtEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpleadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmpleadoActionPerformed
  
     
     private void listartipohab() {
