@@ -112,7 +112,7 @@ public class clEmpleado {
             strSQL = "select ModificarEmpleado('"+dni+"','"+nom+"','"+ape+"','"+fecha+"','"+s+"','"+dire+"','"+tel+"','"+vig+"');";
             objConectar.conectar();
             con = objConectar.getConnection();
-            objConectar.ejecutarBD(strSQL);
+            objConectar.consultarBD(strSQL);
         } catch (Exception e) {
             throw new Exception("Error al modificar un empleado: "+e.getMessage());
         }
