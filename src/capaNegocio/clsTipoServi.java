@@ -72,7 +72,7 @@ public class clsTipoServi {
     }
     
 
-    public void modificartiposer(String cod, String nom ,String des , double prec, Boolean vig ) throws Exception {
+    public void modificartiposer(String cod, String nom ,String des , float prec, Boolean vig ) throws Exception {
         /*
         create or replace function ModificarTipoServicio(cod int, nom varchar(30) , des varchar(100) , prec float, vig Boolean ) returns void as
         $$
@@ -85,11 +85,11 @@ public class clsTipoServi {
         try {
             objConectar.conectar();
             con = objConectar.getConnection();
-            CallableStatement sentencia = con.prepareCall("select ModificarTipoServicio(?,?,?,?,?)");
+            CallableStatement sentencia = con.prepareCall("{call ModificarTipoServicio(?,?,?,?,?)}");
             sentencia.setInt(1, Integer.parseInt(cod));
             sentencia.setString(2, nom);
             sentencia.setString(3, des);
-            sentencia.setDouble(4, prec);
+            sentencia.setFloat(4, prec);
             sentencia.setBoolean(5, vig);
             sentencia.executeUpdate(); 
         } catch (Exception e) {

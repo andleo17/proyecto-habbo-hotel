@@ -100,7 +100,7 @@ public class clsTipoHabitacion {
             objConectar.conectar();
             con = objConectar.getConnection();
             //update tipo_habitacion set nombre=?, descripcion=?,precio=?, vigencia=? where codigoth=?
-            CallableStatement sentencia = con.prepareCall("select ModificarTipoHabitacion(?,?,?,?,?);");
+            CallableStatement sentencia = con.prepareCall("{call ModificarTipoHabitacion(?,?,?,?,?)}");
             sentencia.setInt(1, cod);
             sentencia.setString(2, nom);
             sentencia.setString(3, des);

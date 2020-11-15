@@ -120,7 +120,7 @@ public class clsServicio {
             objConectar.conectar();
             con = objConectar.getConnection();
             //update servicio set descripcion=?, costototal=?,codigots=? where codigoser=?
-            CallableStatement sentencia = con.prepareCall("select ModificarServicio(?,?,?,?);");
+            CallableStatement sentencia = con.prepareCall("{call ModificarServicio(?,?,?,?)}");
             sentencia.setInt(1, cod);
             sentencia.setString(2, descripcion);
             sentencia.setFloat(3, costo);

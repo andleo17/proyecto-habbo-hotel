@@ -442,7 +442,7 @@ public class jdTipoServi extends javax.swing.JDialog {
             if(txtCod.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this," ingresa codigo del servicio  ");
             }else {
-                objtips.modificartiposer(txtCod.getText(),txtNombre.getText(), txtDescr.getText(),Double.parseDouble(txtPrec.getText()),chkEstado.isSelected());
+                objtips.modificartiposer(txtCod.getText(),txtNombre.getText(), txtDescr.getText(),Float.parseFloat(txtPrec.getText()),chkEstado.isSelected());
                 limpiarControles();
                 //habilitarbotones(false);
                 JOptionPane.showMessageDialog(this,"Servicio modificado ");
