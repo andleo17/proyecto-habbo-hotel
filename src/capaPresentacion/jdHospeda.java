@@ -75,10 +75,10 @@ public class jdHospeda extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         txtNumHospedaje = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        lblFecha = new javax.swing.JLabel();
         btnBuscarHospedaje = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jdFecha = new com.toedter.calendar.JDateChooser();
         txtEmpleado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -375,12 +375,6 @@ public class jdHospeda extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel1.setText("N° Hospedaje:");
 
-        jLabel2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jLabel2.setText("Fecha:");
-
-        lblFecha.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        lblFecha.setText("_/_/_");
-
         btnBuscarHospedaje.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnBuscarHospedaje.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Buscar32.png"))); // NOI18N
         btnBuscarHospedaje.addActionListener(new java.awt.event.ActionListener() {
@@ -392,36 +386,31 @@ public class jdHospeda extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         jLabel3.setText("Empleado:");
 
-        txtEmpleado.setEditable(false);
-        txtEmpleado.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        txtEmpleado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmpleadoActionPerformed(evt);
-            }
-        });
+        jLabel13.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel13.setText("Fecha:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtEmpleado)
+                        .addComponent(jdFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(86, 86, 86)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNumHospedaje, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnBuscarHospedaje, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblFecha)
+                        .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNumHospedaje, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscarHospedaje, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -429,19 +418,17 @@ public class jdHospeda extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(lblFecha))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(btnBuscarHospedaje, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNumHospedaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))))
+                            .addComponent(jLabel1))
+                        .addComponent(jdFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13))
+                .addGap(4, 4, 4)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -484,14 +471,17 @@ public class jdHospeda extends javax.swing.JDialog {
         txtDni.setText("");
     }
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-    listartipohab();
+            listartipohab();
             ResultSet rs;
-        try {   
+            /*
+            try {   
             rs = objemple.buscarEmpleado(dniEmpleado);
             txtEmpleado.setText(rs.getString("nombres") + " " + rs.getString("apellidos"));
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+            */
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void cmbTipoHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoHabActionPerformed
@@ -565,7 +555,7 @@ public class jdHospeda extends javax.swing.JDialog {
                 txtNumHospedaje.setText(String.valueOf( objHos.generarNumeroHospedaje()));
             }else{
                 btnNuevo.setText("Nuevo");
-                objHos.registrarHospedaje(Integer.parseInt(txtNumHospedaje.getText()),lblFecha.getText(),txtMotivo.getText(),Double.parseDouble("0.0"),Integer.parseInt(txtNumHabitacion.getText()),txtDni.getText(),dniEmpleado);
+                objHos.registrarHospedaje(Integer.parseInt(txtNumHospedaje.getText()), (Date) jdFecha.getDate(),txtMotivo.getText(),Double.parseDouble("0.0"),Integer.parseInt(txtNumHabitacion.getText()),txtDni.getText(),dniEmpleado);
                 objhab.cambiarEstadoHabitacion(Integer.parseInt(txtNumHabitacion.getText()), "O");
                 limpiarControles();
                 JOptionPane.showMessageDialog(this, "Hospedaje registrado correctamente!");
@@ -597,10 +587,6 @@ public class jdHospeda extends javax.swing.JDialog {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnBuscarHospedajeActionPerformed
-
-    private void txtEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpleadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmpleadoActionPerformed
  
     
     private void listartipohab() {
@@ -673,7 +659,7 @@ public class jdHospeda extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -688,7 +674,7 @@ public class jdHospeda extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblFecha;
+    private com.toedter.calendar.JDateChooser jdFecha;
     private javax.swing.JTable tblHabitacion;
     private javax.swing.JTable tblHospedaje;
     private javax.swing.JTextField txtApellidos;

@@ -30,7 +30,7 @@ public class clsHospedaje {
         return 0;
     }
     
-    public boolean registrarHospedaje(Integer num, String fecIni,String mot,Double cos, Integer numHab, String dniHue,String dniEmp) throws Exception{
+    public boolean registrarHospedaje(Integer num, Date fecIni,String mot,Double cos, Integer numHab, String dniHue,String dniEmp) throws Exception{
         try {
             boolean valor = false;
             boolean registrar = false;
@@ -46,8 +46,8 @@ public class clsHospedaje {
             if(valor){
                 CallableStatement sentencia2 = con.prepareCall("insert into HOSPEDAJE values(?,?,?,?,?,true,false,?,?,?)");
                 sentencia2.setInt(1, num);
-                sentencia2.setString(2, fecIni);
-                sentencia2.setString(3, fecIni);
+                sentencia2.setDate(2, new java.sql.Date(fecIni.getTime()));
+                sentencia2.setDate(3,  new java.sql.Date(fecIni.getTime()));
                 sentencia2.setString(4, mot);
                 sentencia2.setDouble(5, cos);
                 sentencia2.setInt(6,numHab);
