@@ -103,13 +103,13 @@ public class jdFinalizarHosped extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(jLabel4)))
-                .addGap(129, 129, 129)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNombre)
                     .addComponent(lblDias))
-                .addGap(114, 114, 114)
+                .addGap(105, 105, 105)
                 .addComponent(jLabel5)
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblApellido)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -235,13 +235,15 @@ public class jdFinalizarHosped extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jLabel10)
-                                .addComponent(jLabel11))))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane2)
+                                    .addComponent(jScrollPane1))))
+                        .addGap(9, 9, 9))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +255,7 @@ public class jdFinalizarHosped extends javax.swing.JDialog {
                             .addComponent(txtTotalHab)
                             .addComponent(txtTotalSer)
                             .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addGap(17, 17, 17))
         );
@@ -333,7 +335,13 @@ public class jdFinalizarHosped extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            objHospedaje.finalizarHospedaje(txtDni.getText());
+            JOptionPane.showMessageDialog(this, "Hospedaje finalizado");
+            limpiarControles();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -378,6 +386,21 @@ public class jdFinalizarHosped extends javax.swing.JDialog {
             }
         });
     }
+    
+    public void limpiarControles() {
+        txtDni.setText("");
+        lblNombre.setText("");
+        lblApellido.setText("");
+        lblDias.setText("");
+        txtFecha.setText("");
+        listarHabitaciones("");
+        listarServicios("");
+        Float hab = costoHabitaciones("") ;
+        Float ser = costoServicios("") ;
+        txtTotalHab.setText("");
+        txtTotalSer.setText("");
+        txtTotal.setText("");
+    }
 
     public void listarHabitaciones(String dni ){
         ResultSet rs = null;
@@ -394,7 +417,7 @@ public class jdFinalizarHosped extends javax.swing.JDialog {
             while(rs.next()){
                 registro=new Vector();
                 registro.add(0,rs.getInt("numerohab"));
-                registro.add(1,rs.getString("descripcion"));
+                registro.add(1,rs.getString("nombre"));
                 registro.add(2,rs.getFloat("precio"));
                 modelo.addRow(registro);
                     
@@ -427,7 +450,7 @@ public class jdFinalizarHosped extends javax.swing.JDialog {
                     
             }
             
-            tblHab.setModel(modelo);
+            tblEmpleados1.setModel(modelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }    
