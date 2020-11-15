@@ -309,7 +309,7 @@ public class jdFinalizarHosped extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Ingrese un Dni");
             }else{
                 rs=objHospedaje.DatosHospedaje(txtDni.getText());
-                while(rs.next()){
+                if(rs.next()){
                     lblNombre.setText(rs.getString("nombres"));
                     lblApellido.setText(rs.getString("apellidos"));
                     lblDias.setText(String.valueOf(rs.getInt("dias")));
@@ -321,6 +321,8 @@ public class jdFinalizarHosped extends javax.swing.JDialog {
                     txtTotalHab.setText(String.valueOf(hab));
                     txtTotalSer.setText(String.valueOf(ser));
                     txtTotal.setText(String.valueOf(hab+ser));
+                }else{
+                    JOptionPane.showMessageDialog(this, "El cliente no tiene hospedajes registrados");
                 }
                 
             }

@@ -109,7 +109,7 @@ public class clEmpleado {
         }
         try {
             //strSQL = "update empleado set nombres='"+nom+"',apellidos='"+ape+"',fechanac='"+fecha+"',sexo='"+s+"',direccion='"+dire+"',telefono='"+tel+"',vigencia='"+vig+"' where dniemp='"+dni+"'";
-            strSQL = "select ModificarEmpleado('"+nom+"','"+ape+"','"+fecha+"','"+s+"','"+dire+"','"+tel+"','"+vig+"','"+dni+"');";
+            strSQL = "select ModificarEmpleado('"+dni+"','"+nom+"','"+ape+"','"+fecha+"','"+s+"','"+dire+"','"+tel+"','"+vig+"');";
             objConectar.conectar();
             con = objConectar.getConnection();
             objConectar.ejecutarBD(strSQL);

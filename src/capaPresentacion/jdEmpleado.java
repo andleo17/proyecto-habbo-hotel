@@ -502,11 +502,11 @@ clEmpleado objem = new clEmpleado();
                 objem.modificarEmpleado(txtDni.getText(),txtNombre.getText(),txtApellido.getText(),txtFecha.getText(),cbSexo.getSelectedItem().toString(),txtDireccion.getText(),txtTelefono.getText(),chkEstado.isSelected());
                 limpiarContro();
                 habilitarbotones(false);
-                
                 listarEmple();
                 JOptionPane.showMessageDialog(this," registro modificado ");
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this," registro no modificado: "+e.getMessage());
 
         }
     }//GEN-LAST:event_btnModiActionPerformed

@@ -100,15 +100,15 @@ public class clsTipoHabitacion {
             objConectar.conectar();
             con = objConectar.getConnection();
             //update tipo_habitacion set nombre=?, descripcion=?,precio=?, vigencia=? where codigoth=?
-            CallableStatement sentencia = con.prepareCall("select MidificarTipoHabitacion(?,?,?,?,?);");
-            sentencia.setString(1, nom);
-            sentencia.setString(2, des);
-            sentencia.setDouble(3, prec);
-            sentencia.setBoolean(4, vig);
-            sentencia.setInt(5, cod);
+            CallableStatement sentencia = con.prepareCall("select ModificarTipoHabitacion(?,?,?,?,?);");
+            sentencia.setInt(1, cod);
+            sentencia.setString(2, nom);
+            sentencia.setString(3, des);
+            sentencia.setDouble(4, prec);
+            sentencia.setBoolean(5, vig);
             sentencia.executeUpdate();
         } catch (Exception e) {
-            throw  new Exception("Error al modificar tipo de habitación: "+e.getMessage() ) ;
+            throw  new Exception("Error al modificar tipo de habitación: "+e.getMessage()) ;
         }
     }
     

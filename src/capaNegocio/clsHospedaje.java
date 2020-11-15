@@ -98,7 +98,7 @@ public class clsHospedaje {
         objConectar.conectar();
         con = objConectar.getConnection();
         CallableStatement sentencia = con.prepareCall("select huesped.nombres,huesped.apellidos,hospedaje.fechaini,hospedaje.fechafin-hospedaje.fechaini as dias\n" +
-        "from huesped inner join hospedaje on huesped.dnihue=hospedaje.dnihue where hospedaje.dnihue=? where hospedaje.estado=true");
+        "from huesped inner join hospedaje on huesped.dnihue=hospedaje.dnihue where hospedaje.dnihue=? and hospedaje.estado=true");
         sentencia.setString(1, dni);
         rs= sentencia.executeQuery();
         while(rs.next()){

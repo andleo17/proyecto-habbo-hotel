@@ -121,10 +121,10 @@ public class clsServicio {
             con = objConectar.getConnection();
             //update servicio set descripcion=?, costototal=?,codigots=? where codigoser=?
             CallableStatement sentencia = con.prepareCall("select ModificarServicio(?,?,?,?);");
-            sentencia.setString(1, descripcion);
-            sentencia.setFloat(2, costo);
-            sentencia.setInt(3, tipo);
-            sentencia.setInt(4, cod);
+            sentencia.setInt(1, cod);
+            sentencia.setString(2, descripcion);
+            sentencia.setFloat(3, costo);
+            sentencia.setInt(4, tipo);
             sentencia.executeUpdate();
         } catch (Exception e) {
             throw new Exception("Error al registrar" +e.getMessage());    

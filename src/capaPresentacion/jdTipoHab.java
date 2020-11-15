@@ -393,16 +393,16 @@ public class jdTipoHab extends javax.swing.JDialog {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         try {
             if(txtCodigo.getText().isEmpty()){
-               JOptionPane.showMessageDialog(this," ingresa codigo para modificar  ");  
+               JOptionPane.showMessageDialog(this," ingresa codigo para modificar");  
             }else { 
                 objtipoHab.modificartipohab(Integer.parseInt(txtCodigo.getText()),txtNombre.getText(), txtDescripcion.getText(),Double.parseDouble(txtPrecio.getText()),chkVigencia.isSelected());
                 limpiarControles();
                 habilitarbotones(false);
-                JOptionPane.showMessageDialog(this," registro modificado ");  
-                
+                JOptionPane.showMessageDialog(this," registro modificado "); 
+                listarTipoHabitacion();
             }
         } catch (Exception e) {
-            
+            JOptionPane.showMessageDialog(this," registro no modificado: "+e.getMessage()); 
         }
     }//GEN-LAST:event_btnModificarActionPerformed
 

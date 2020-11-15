@@ -78,7 +78,7 @@ public class clsTipoServi {
         $$
         declare
         begin
-            update tipo_servicio set nombre=nom, descripcion=des,precio=prec, vigencia=vig where codigoth=cod;
+            update tipo_servicio set nombre=nom, descripcion=des,precio=prec, vigencia=vig where codigots=cod;
         end;
         $$language'plpgsql'
         */
@@ -86,11 +86,11 @@ public class clsTipoServi {
             objConectar.conectar();
             con = objConectar.getConnection();
             CallableStatement sentencia = con.prepareCall("select ModificarTipoServicio(?,?,?,?,?)");
-            sentencia.setString(1, nom);
-            sentencia.setString(2, des);
-            sentencia.setDouble(3, prec);
-            sentencia.setBoolean(4, vig);
-            sentencia.setInt(5, Integer.parseInt(cod));
+            sentencia.setInt(1, Integer.parseInt(cod));
+            sentencia.setString(2, nom);
+            sentencia.setString(3, des);
+            sentencia.setDouble(4, prec);
+            sentencia.setBoolean(5, vig);
             sentencia.executeUpdate(); 
         } catch (Exception e) {
             throw  new Exception("Error al modificar tipo de habitación: "+e.getMessage()) ;
