@@ -32,6 +32,8 @@ public class clEmpleado {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al buscar Empleado: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }    
     
@@ -89,6 +91,8 @@ public class clEmpleado {
             }
         } catch (Exception e) {
             throw new Exception("Error al verificar datos del empleado: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
      
@@ -117,6 +121,8 @@ public class clEmpleado {
             objConectar.consultarBD(strSQL);
         } catch (Exception e) {
             throw new Exception("Error al modificar un empleado: "+e.getMessage());
+        }finally {
+            con.close();
         }
 }
     
@@ -189,6 +195,8 @@ public class clEmpleado {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar empleados: "+e.getMessage());
+        } finally {
+            con.close();
         }
     }
       
@@ -203,6 +211,8 @@ public class clEmpleado {
             }
         } catch (Exception e) {
             throw new Exception("Error al calular el total de empleados: "+e.getMessage());
+        }finally {
+            con.close();
         }
         return 0;
     }
