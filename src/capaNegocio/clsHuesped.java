@@ -28,6 +28,8 @@ public class clsHuesped {
             return rs;      
         } catch (Exception e) {
             throw new  Exception ("error al buscar huesped: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -58,6 +60,8 @@ public class clsHuesped {
         }catch (Exception e){
             con.rollback();
             throw new Exception ("Error al registrar huesped: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -76,6 +80,8 @@ public class clsHuesped {
             sentencia.executeUpdate();
         }catch (Exception e){
             throw new Exception ("Error al modificar datos de huesped: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -88,6 +94,8 @@ public class clsHuesped {
             sentencia.executeUpdate();
         }catch(Exception e){
             throw new Exception("Error al dar de baja al huesped: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -100,6 +108,8 @@ public class clsHuesped {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error a listar datos de huesped: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -118,6 +128,8 @@ public class clsHuesped {
         } catch (Exception e) {
             
             throw new Exception ("error al verificar huesped: "+e.getMessage());
+        }finally {
+            con.close();
         }
         
     }
@@ -133,6 +145,8 @@ public class clsHuesped {
             }
         } catch (Exception e) {
             throw new Exception("Error al calular el total de empleados: "+e.getMessage());
+        }finally {
+            con.close();
         }
         return 0;
     }

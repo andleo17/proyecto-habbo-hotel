@@ -36,7 +36,9 @@ public class clsReserva {
             }
         } catch (Exception e) {
             throw new Exception("Error al generar el código" +e.getMessage())  ; 
-        }    
+        }    finally {
+            con.close();
+        }
     }
     
     public void registarReserva(int cod,Date ini,Date fin,boolean estado, boolean confirmacion, String referencia, int hab, String dnihue, String dniemp) throws Exception{
@@ -60,6 +62,8 @@ public class clsReserva {
         } catch (Exception e) {
             con.rollback();
             throw new Exception("Error al registrar" +e.getMessage())  ;    
+        }finally {
+            con.close();
         }
     }
     
@@ -80,6 +84,8 @@ public class clsReserva {
             sentencia.executeUpdate(); 
         } catch (Exception e) {
             throw new Exception("Error al registrar" +e.getMessage());    
+        }finally {
+            con.close();
         }
     }
     
@@ -93,6 +99,8 @@ public class clsReserva {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -105,6 +113,8 @@ public class clsReserva {
             sentencia.executeUpdate();
         } catch (Exception e) {
             throw new Exception("Error al dar de baja a la reserva" +e.getMessage());    
+        }finally {
+            con.close();
         }
     }
     

@@ -70,6 +70,8 @@ public class clEmpleado {
         } catch (Exception e) {
             con.rollback();
             throw new Exception("Error al agregar un empleado: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
        
@@ -130,6 +132,8 @@ public class clEmpleado {
         } catch (Exception e) {
             con.rollback();
             throw new Exception("Error al dar de baja al empleado: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -146,6 +150,8 @@ public class clEmpleado {
             }
         } catch (Exception e) {
             throw new Exception("Error al validar Vigencia: "+e.getMessage());
+        }finally {
+            con.close();
         }
         return false;
     }
@@ -169,6 +175,8 @@ public class clEmpleado {
         } catch (Exception e) {
             con.rollback();
             throw new Exception("Error al eliminar al empleado; "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
      

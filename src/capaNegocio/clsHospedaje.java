@@ -27,6 +27,8 @@ public class clsHospedaje {
             }
         } catch (Exception e) {
             throw new Exception("Error al generar el número de hospedaje... "+e.getMessage());
+        }finally {
+            con.close();
         }
         return 0;
     }
@@ -66,6 +68,8 @@ public class clsHospedaje {
             con.rollback();
             throw new Exception ("Error al registrar Habitación!: "+e.getMessage());
             //throw new Exception (e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -89,6 +93,8 @@ public class clsHospedaje {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar habitaciones: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -102,6 +108,8 @@ public class clsHospedaje {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar habitaciones: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
  
@@ -116,7 +124,9 @@ public class clsHospedaje {
         return rs;
     } catch (Exception e) {
         throw new Exception (e.getMessage());
-    }   
+    }   finally {
+            con.close();
+        }
     }  
  
  public ResultSet listarHospedajesCliente (String dni) throws Exception{
@@ -133,7 +143,9 @@ public class clsHospedaje {
              return rs;
     } catch (Exception e) {
         throw new Exception ("Error al listar  los hospedajes del cliente: "+e.getMessage());
-    }
+    }finally {
+            con.close();
+        }
        
   } 
  
@@ -153,7 +165,9 @@ public class clsHospedaje {
         return rs;
     } catch (Exception e) {
         throw new Exception (e.getMessage());
-    }
+    }finally {
+            con.close();
+        }
        
   }
  
@@ -175,7 +189,9 @@ public class clsHospedaje {
         }
     } catch (Exception e) {
         throw new Exception (e.getMessage());
-    }
+    }finally {
+            con.close();
+        }
         return null;
        
   }
@@ -197,7 +213,9 @@ public Float CostoTHabCliente (String dni) throws Exception{
         return null;
     } catch (Exception e) {
         throw new Exception (e.getMessage());
-    }
+    }finally {
+            con.close();
+        }
   }
 
 public boolean finalizarHospedaje(String dni) throws Exception{
@@ -223,7 +241,9 @@ public boolean finalizarHospedaje(String dni) throws Exception{
     } catch (Exception e) {
         con.rollback();
         throw new Exception (e.getMessage());
-    }
+    }finally {
+            con.close();
+        }
         return false;
 }
 
@@ -252,7 +272,9 @@ public void anularHospedaje(int cod) throws Exception {
     } catch (Exception e) {
         con.rollback();
         throw e;
-    }
+    }finally {
+            con.close();
+        }
 }
 
 public ResultSet listarHabitacionesHosp(String dni) throws Exception {

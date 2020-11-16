@@ -430,7 +430,7 @@ clsHuesped objHuesped = new clsHuesped();
                  lbltotal.setText(String.valueOf(objHuesped.totalEmpleados()));
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage() + "Error al listar huesped");
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }
    

@@ -39,6 +39,8 @@ public class clsServicio {
         } catch (Exception e) {
             
             throw new Exception ("Error al buscar o el cliente no tiene hospedajes vigentes" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -53,6 +55,8 @@ public class clsServicio {
         } catch (Exception e) {
             
             throw new Exception ("Error al listar" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -69,6 +73,8 @@ public class clsServicio {
         } catch (Exception e) {
             
             throw new Exception ("Error al buscar habitaciones" +e.getMessage());
+        }finally {
+            con.close();
         }
         return null;
     }
@@ -101,6 +107,8 @@ public class clsServicio {
         } catch (Exception e) {
             con.rollback();
             throw new Exception("Error al registrar" +e.getMessage())  ;    
+        }finally {
+            con.close();
         }
     }
     
@@ -126,6 +134,8 @@ public class clsServicio {
             sentencia.executeUpdate();
         } catch (Exception e) {
             throw new Exception("Error al registrar" +e.getMessage());    
+        }finally {
+            con.close();
         }
     }
     
@@ -138,6 +148,8 @@ public class clsServicio {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar el servicio" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -150,6 +162,8 @@ public class clsServicio {
             sentencia.executeUpdate();
         } catch (Exception e) {
             throw new Exception("Error al dar de baja al servicio" +e.getMessage());    
+        }finally {
+            con.close();
         }
     }
     
@@ -162,6 +176,8 @@ public class clsServicio {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar el tipo de servicio" +e.getMessage());
+        }finally {
+            con.close();
         }
         
     }
@@ -175,6 +191,8 @@ public class clsServicio {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar el tipo de servicio" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -192,6 +210,8 @@ public class clsServicio {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar los servicios" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -208,6 +228,8 @@ public class clsServicio {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar los servicios" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -225,6 +247,8 @@ public class clsServicio {
             return 0;
         } catch (Exception e) {
             throw new Exception("Error" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -241,6 +265,8 @@ public class clsServicio {
             return 0;
         } catch (Exception e) {
             throw new Exception("Error al listar los servicios" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -259,6 +285,8 @@ public class clsServicio {
             return 0;
         } catch (Exception e) {
             throw new Exception("Error al listar los servicios" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
 }

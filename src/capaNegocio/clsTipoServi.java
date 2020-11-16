@@ -27,6 +27,8 @@ public class clsTipoServi {
              return 0 ; 
         } catch (Exception e) {
             throw  new Exception("Error al generar en nuevo codigo: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -44,6 +46,8 @@ public class clsTipoServi {
             }
         } catch (Exception e) {
             throw new Exception ("error al verificar servicio" +e.getMessage());
+        }finally {
+            con.close();
         }
         
     }
@@ -69,6 +73,8 @@ public class clsTipoServi {
         } catch (Exception e) {
             con.rollback();
             throw new Exception("Error al registrar" +e.getMessage())  ;    
+        }finally {
+            con.close();
         }
     }
     
@@ -95,6 +101,8 @@ public class clsTipoServi {
             sentencia.executeUpdate(); 
         } catch (Exception e) {
             throw  new Exception("Error al modificar tipo de habitación: "+e.getMessage()) ;
+        }finally {
+            con.close();
         }
     }
     
@@ -109,6 +117,8 @@ public class clsTipoServi {
             return rs;
         } catch (Exception e) {
             throw new  Exception ("Error al buscar " +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -122,6 +132,8 @@ public class clsTipoServi {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al consultar Servi" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -140,6 +152,8 @@ public class clsTipoServi {
         } catch (Exception e) {
             con.rollback();
             throw new Exception("Error cuando eliminas el servicio " +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -158,6 +172,8 @@ public class clsTipoServi {
         } catch (Exception e) {
             con.rollback();
             throw new Exception("Error cuando das de baja el servicio " +e.getMessage());
+        }finally {
+            con.close();
         }
     }
      
@@ -170,6 +186,8 @@ public class clsTipoServi {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar: "+e.getMessage());
+        }finally {
+            con.close();
         }
         
     }

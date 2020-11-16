@@ -29,6 +29,8 @@ public class clsHabitacion {
             }
         } catch (Exception e) {
             throw new Exception ("error al verificar servicio" +e.getMessage());
+        }finally {
+            con.close();
         }
         
     }
@@ -61,6 +63,8 @@ public class clsHabitacion {
         } catch (Exception e) {
             con.rollback();
             throw new Exception("Error al registrar" +e.getMessage())  ;    
+        }finally {
+            con.close();
         }
         
     }
@@ -79,6 +83,8 @@ public class clsHabitacion {
                 sentencia.executeUpdate();  
         } catch (Exception e) {
             throw e;
+        }finally {
+            con.close();
         }
     }
     
@@ -92,6 +98,8 @@ public class clsHabitacion {
             return rs;
         } catch (Exception e) {
             throw new Exception("ERROS AL LISTAR " +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -105,6 +113,8 @@ public class clsHabitacion {
             return rs;       
         } catch (Exception e) {
             throw new  Exception ("error al buscar w" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -118,6 +128,8 @@ public class clsHabitacion {
             return rs; 
         } catch (Exception e) {
             throw new Exception("Error al consultar Habitación" +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -139,6 +151,8 @@ public class clsHabitacion {
         } catch (Exception e) {
             con.rollback();
             throw new Exception("Error cuando eliminas la habitacion " +e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -151,6 +165,8 @@ public class clsHabitacion {
             sentencia1.executeUpdate();
         } catch (Exception e) {
             throw new Exception("Error cuando eliminas la habitacion " +e.getMessage());
+        }finally {
+            con.close();
         }
     }
      
@@ -164,6 +180,8 @@ public class clsHabitacion {
             return rs;
         } catch (Exception e) {
             throw new Exception("ERROS AL LISTAR HAB DISPONIBLES " +e.getMessage());
+        }finally {
+            con.close();
         }
     }
        
@@ -178,6 +196,8 @@ public class clsHabitacion {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar" +e.getMessage());
+        }finally {
+            con.close();
         }
     }  
     
@@ -191,6 +211,8 @@ public class clsHabitacion {
             sentencia1.executeUpdate();
         } catch (Exception e) {
             throw new Exception ("Error al cambiar estado de Habitación!: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
      
@@ -206,6 +228,8 @@ public class clsHabitacion {
             }
         } catch (Exception e) {
             throw new Exception("Error al realizar consulta...: "+e.getMessage());
+        }finally {
+            con.close();
         }
         return null;
     }

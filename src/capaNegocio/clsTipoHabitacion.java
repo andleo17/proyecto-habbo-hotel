@@ -26,6 +26,8 @@ public class clsTipoHabitacion {
             }
         } catch (Exception e) {
             throw  new Exception("Error al generar en new codigo: "+e.getMessage());
+        }finally {
+            con.close();
         }
         return 0 ; 
 }
@@ -44,6 +46,8 @@ public class clsTipoHabitacion {
             sentencia.executeUpdate();
         } catch (Exception e) {
             throw  new Exception("Error al registrar: "+e.getMessage() ) ;
+        }finally {
+            con.close();
         }
     }
     
@@ -57,6 +61,8 @@ public class clsTipoHabitacion {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al buscar el tipo de habi: "+e.getMessage());
+        }finally {
+            con.close();
         }
     
 }
@@ -84,6 +90,8 @@ public class clsTipoHabitacion {
         } catch (Exception e) {
             con.rollback();
             throw new Exception("Error: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -110,6 +118,8 @@ public class clsTipoHabitacion {
             sentencia.executeUpdate();
         } catch (Exception e) {
             throw  new Exception("Error al modificar tipo de habitación: "+e.getMessage()) ;
+        }finally {
+            con.close();
         }
     }
     
@@ -122,6 +132,8 @@ public class clsTipoHabitacion {
             sentencia.executeUpdate();
         } catch (Exception e) {
             throw  new Exception("Error al dar de bajita al tipo de habitación: "+e.getMessage() ) ;
+        }finally {
+            con.close();
         }
     }
     
@@ -134,6 +146,8 @@ public class clsTipoHabitacion {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -147,6 +161,8 @@ public class clsTipoHabitacion {
             return rs;
         } catch (Exception e) {
             throw new Exception("Error al listar: "+e.getMessage());
+        }finally {
+            con.close();
         }
     }
     
@@ -161,6 +177,8 @@ public class clsTipoHabitacion {
             }
         } catch (Exception e) {
             throw  new Exception("Error al contar: "+e.getMessage());
+        }finally {
+            con.close();
         }
         return 0 ; 
 }
@@ -174,6 +192,8 @@ public class clsTipoHabitacion {
             return rs ; //el codigo es del alias del CODIGO FROM
         } catch (Exception e) {
             throw  new Exception("Error al contar: "+e.getMessage());
+        }finally {
+            con.close();
         }
      }
      
@@ -189,6 +209,8 @@ public class clsTipoHabitacion {
             }
         } catch (Exception e) {
             throw  new Exception("Error: "+e.getMessage());
+        }finally {
+            con.close();
         }
         return 0 ; 
 }
@@ -208,7 +230,9 @@ public class clsTipoHabitacion {
            
        } catch (Exception e) {
            throw new Exception("Error al validar " +e.getMessage());
-       } 
+       } finally {
+            con.close();
+        }
    }
    
    public ResultSet listarHabDis(String nombrehab) throws Exception {
@@ -229,6 +253,8 @@ public class clsTipoHabitacion {
            
         } catch (Exception e) {
             throw new Exception("Error al listar " +e.getMessage());
+        }finally {
+            con.close();
         }
     }
    
@@ -242,6 +268,8 @@ public class clsTipoHabitacion {
             return rs.getString("nombre");        
         } catch (Exception e) {
             throw new Exception("Error al listar " +e.getMessage());
+        }finally {
+            con.close();
         }
     }
 }
