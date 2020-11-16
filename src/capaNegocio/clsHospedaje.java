@@ -3,6 +3,7 @@ package capaNegocio;
 import capaDatos.*;
 import capaPresentacion.jfPrincipal;
 import java.sql.*;
+import java.util.Date;
 
  /**
  *
