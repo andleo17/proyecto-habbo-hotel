@@ -52,7 +52,8 @@ public class clsTipoServi {
         try {
             objConectar.conectar();
             con = objConectar.getConnection();
-            CallableStatement sentencia1 = con.prepareCall("selec * from tipo_servicio where nombre=?");
+            con.setAutoCommit(false);
+            CallableStatement sentencia1 = con.prepareCall("select * from tipo_servicio where nombre=?");
             sentencia1.setString(1, nom);     
             rs = sentencia1.executeQuery();
             if(!rs.next()){
