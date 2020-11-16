@@ -417,11 +417,13 @@ public class jdTipoHab extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this," tipo habitacion dado de baja ");                  
                } else { 
                     JOptionPane.showMessageDialog(this," no se puede dar de baja porque   tiene hab registrada");
-                } limpiarControles();  
+                }
+                limpiarControles();  
                   habilitarbotones(false);
                   listarTipoHabitacion();
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btnDarBajaActionPerformed
 

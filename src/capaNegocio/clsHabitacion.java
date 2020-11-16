@@ -43,9 +43,9 @@ public class clsHabitacion {
             sentencia1.setInt(1, num);
             rs=sentencia1.executeQuery();
             if(rs.next()){
-                valor=true;
-            }else{
                 valor=false;
+            }else{
+                valor=true;
             }
             
             if(valor){

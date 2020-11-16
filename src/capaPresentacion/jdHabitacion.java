@@ -403,7 +403,12 @@ public class jdHabitacion extends javax.swing.JDialog {
     }
     
     private void btnDarBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarBajaActionPerformed
-
+        try {
+            objHab.dardebajahabitacion(Integer.parseInt(txtNumeroHab.getText()));
+            JOptionPane.showMessageDialog(this, "Habitación dada de baja");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_btnDarBajaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

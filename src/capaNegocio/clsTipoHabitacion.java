@@ -64,6 +64,7 @@ public class clsTipoHabitacion {
         try { //transaccion de eliminar el tipo de habitacion
             objConectar.conectar();
             con = objConectar.getConnection();
+            con.setAutoCommit(false);
             CallableStatement sentencia1 = con.prepareCall("delete from habitacion where codigoth=?");
             sentencia1.setInt(1, cod);
             sentencia1.executeUpdate();
