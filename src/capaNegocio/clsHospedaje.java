@@ -147,7 +147,7 @@ public class clsHospedaje {
         "inner join tipo_servicio on servicio.codigots=tipo_servicio.codigots\n" +
         "inner join habitacion on habitacion.numerohab=hospedaje.numerohab \n" +
         "inner join tipo_habitacion on habitacion.codigoth=tipo_habitacion.codigoth\n" +
-        "where hospedaje.dnihue=? and hospedaje.estado=true");
+        "where hospedaje.dnihue=? and hospedaje.estado=true and servicio.estado=true");
         sentencia.setString(1, dni);
         rs=sentencia.executeQuery();
         return rs;

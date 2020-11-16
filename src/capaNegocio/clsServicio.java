@@ -186,7 +186,7 @@ public class clsServicio {
             "inner join tipo_servicio on tipo_servicio.codigots=servicio.codigots\n" +
             "inner join hospedaje on servicio.numerohos=hospedaje.numerohos \n" +
             "inner join habitacion on hospedaje.numerohab=habitacion.numerohab\n" +
-            "where hospedaje.dnihue=? and hospedaje.estado=true");
+            "where hospedaje.dnihue=? and hospedaje.estado=true and servicio.estado=true");
             sentencia.setString(1, dni);
             rs = sentencia.executeQuery();
             return rs;

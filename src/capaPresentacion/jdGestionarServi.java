@@ -433,6 +433,7 @@ public class jdGestionarServi extends javax.swing.JDialog {
         // Dar de baja -> Eleji darle de baja para no eliminar registros y no perder información
         try {
             objServicio.darBajaServicio(codServicio);
+            JOptionPane.showMessageDialog(this, "Servicio dado de baja correctamente");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
