@@ -82,7 +82,7 @@ public class clsUsuario {
         */
         //update usuario set contrasena='" + nuevaCon + "' where nombreusu='" + usu + "'
         strSQL = "select ModificarCotraseña('"+usu+"','"+nuevaCon+"')";
-        objConectar.ejecutarBD(strSQL);
+        objConectar.consultarBD(strSQL);
     }
 
 }
