@@ -77,7 +77,7 @@ public class clEmpleado {
         try {
             objConectar.conectar();
             con = objConectar.getConnection();
-            strSQL = "select * from empleado where dniemp='"+dni+"' and vigencia=true";
+            strSQL = "select * from empleado where dniemp='"+dni+"'";
             rs=objConectar.consultarBD(strSQL);
             if(rs.next()){
                 return false;
