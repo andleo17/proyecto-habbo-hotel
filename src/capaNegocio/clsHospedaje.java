@@ -69,6 +69,17 @@ public class clsHospedaje {
         }
     }
     
+    public void modificarHosp(int numhos, String motivo) throws Exception{
+        try {
+            objConectar.conectar();
+            con = objConectar.getConnection();
+            strSQL="update hospedaje set motivo='"+motivo+"' where numerohos='"+numhos+"'";
+            objConectar.ejecutarBD(strSQL);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
     public ResultSet listarHospedajes() throws Exception{
         try {
             objConectar.conectar();
@@ -220,9 +231,20 @@ public ResultSet listarHospPendienteS() throws Exception {
     try {
         objConectar.conectar();
         con = objConectar.getConnection();
-        strSQL= "select h.numerohos, h.fechaini, h.numerohab, th.nombre,hu.nombres || ' ' || hu.apellidos as nom_huesped from hospedaje h inner join habitacion ha on h.numerohab = ha.numerohab inner join tipo_habitacion th on th.codigoth = ha.codigoth inner join huesped hu on hu.dnihue = h.dnihue where estadopago = false";
+        strSQL= "select h.numerohos, h.fechaini, h.numerohab, th.nombre,hu.nombres || ' ' || hu.apellidos as nom_huesped from hospedaje h inner join habitacion ha on h.numerohab = ha.numerohab inner join tipo_habitacion th on th.codigoth = ha.codigoth inner join huesped hu on hu.dnihue = h.dnihue where estadopago = false and h.estado=true";
         rs = objConectar.consultarBD(strSQL);
         return rs;
+    } catch (Exception e) {
+        throw e;
+    }
+}
+
+public void anularHospedaje(int cod) throws Exception {
+    try {
+        objConectar.conectar();
+        con = objConectar.getConnection();
+        strSQL = "update hospedaje set estado=false where numerohos='" +cod+"'";
+        objConectar.ejecutarBD(strSQL);
     } catch (Exception e) {
         throw e;
     }

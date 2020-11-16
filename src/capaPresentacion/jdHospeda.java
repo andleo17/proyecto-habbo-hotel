@@ -106,6 +106,11 @@ public class jdHospeda extends javax.swing.JDialog {
                 "N° Hospedaje", "N° Habitación", "Tipo Habitación", "Huésped", "Fecha Inicio"
             }
         ));
+        tblHospedaje.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHospedajeMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblHospedaje);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -326,10 +331,20 @@ public class jdHospeda extends javax.swing.JDialog {
         btnModificar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Modificar32.png"))); // NOI18N
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnAnular.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/DarBja32.png"))); // NOI18N
         btnAnular.setText("Anular");
+        btnAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnularActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Limpiar32.png"))); // NOI18N
@@ -471,13 +486,13 @@ public class jdHospeda extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -614,12 +629,16 @@ public class jdHospeda extends javax.swing.JDialog {
                     cmbTipoHab.setSelectedItem(objhab.obtenerNombreTipoHabitacion(rsHospedaje.getInt("numerohab")));
                     //cmbTipoHab.setSelectedItem(String.valueOf(objHab.obtenerNombreTipoHabitacion(101)));
                     txtMotivo.setText(rsHospedaje.getString("motivo"));
+                    txtDNIEmpleado.setText(rsHospedaje.getString("dniemp"));
+                    jdFecha.setDate(rsHospedaje.getDate("fechaini"));
+                    jButton1ActionPerformed(null);
                 }else{
                     JOptionPane.showMessageDialog(this, "Número de hospedaje no registrado!");
                     limpiarControles();
                 }
             }
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btnBuscarHospedajeActionPerformed
 
@@ -637,6 +656,31 @@ public class jdHospeda extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tblHospedajeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHospedajeMouseClicked
+        txtNumHospedaje.setText(String.valueOf(tblHospedaje.getValueAt(tblHospedaje.getSelectedRow(),0)));
+        btnBuscarHospedajeActionPerformed(null);
+    }//GEN-LAST:event_tblHospedajeMouseClicked
+
+    private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
+        try {
+            objHos.anularHospedaje(Integer.parseInt(txtNumHospedaje.getText()));
+            JOptionPane.showMessageDialog(this, "Hospedaje anulado");
+            btnBuscarHospedajeActionPerformed(null);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_btnAnularActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        try {
+            objHos.modificarHosp(Integer.parseInt(txtNumHospedaje.getText()), txtMotivo.getText());
+            JOptionPane.showMessageDialog(this, "Hospedaje modificado");
+            btnBuscarHospedajeActionPerformed(null);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
  
     
     private void listartipohab() {
