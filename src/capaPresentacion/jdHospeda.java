@@ -522,6 +522,7 @@ public class jdHospeda extends javax.swing.JDialog {
             listartipohab();
             ResultSet rs;
             listarHospedajesPendientes();
+            jdFecha.setDate(new java.util.Date());
             /*
             try {   
             rs = objemple.buscarEmpleado(dniEmpleado);
@@ -667,6 +668,7 @@ public class jdHospeda extends javax.swing.JDialog {
             objHos.anularHospedaje(Integer.parseInt(txtNumHospedaje.getText()));
             JOptionPane.showMessageDialog(this, "Hospedaje anulado");
             btnBuscarHospedajeActionPerformed(null);
+            listarHospedajesPendientes();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -677,6 +679,7 @@ public class jdHospeda extends javax.swing.JDialog {
             objHos.modificarHosp(Integer.parseInt(txtNumHospedaje.getText()), txtMotivo.getText());
             JOptionPane.showMessageDialog(this, "Hospedaje modificado");
             btnBuscarHospedajeActionPerformed(null);
+            listarHospedajesPendientes();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }

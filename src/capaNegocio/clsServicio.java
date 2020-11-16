@@ -28,7 +28,7 @@ public class clsServicio {
         try {
             objConectar.conectar();
             con = objConectar.getConnection();
-            CallableStatement sentencia = con.prepareCall("select * from reserva where dnihue=? and estado=true");
+            CallableStatement sentencia = con.prepareCall("select * from hospedaje where dnihue=? and estado=true");
             sentencia.setString(1, dni);
             rs= sentencia.executeQuery();
             if( rs.next()){ 
@@ -49,14 +49,11 @@ public class clsServicio {
             CallableStatement sentencia = con.prepareCall("select nombres,apellidos from huesped  where dnihue=? and estado=true");
             sentencia.setString(1, dni);
             rs= sentencia.executeQuery();
-            if( rs.next()){ 
-                return rs;
-            }
+            return rs;
         } catch (Exception e) {
             
             throw new Exception ("Error al listar" +e.getMessage());
         }
-        return null;
     }
     
     public ResultSet listarHabitacionesCliente(String dni) throws Exception{
@@ -81,6 +78,7 @@ public class clsServicio {
             boolean valor;
             objConectar.conectar();
             con = objConectar.getConnection();
+            con.setAutoCommit(false);
             CallableStatement sentencia1 = con.prepareCall("select * from servicio where descripcion=?");
             sentencia1.setString(1, descripcion);
             sentencia1.executeQuery();
@@ -91,7 +89,7 @@ public class clsServicio {
             }
              
             if(valor){
-                CallableStatement sentencia = con.prepareCall("insert into servicio values(select COALESCE(max (codigoser),0)+1 as codigo from servicio,current_date,?,?,true,?,?)");
+                CallableStatement sentencia = con.prepareCall("insert into servicio values((select COALESCE(max (codigoser),0)+1 as codigo from servicio),current_date,?,?,true,false,?,?)");
                 sentencia.setString(1, descripcion);
                 sentencia.setFloat(2, costo);
                 sentencia.setInt(3, tipo);
@@ -184,7 +182,7 @@ public class clsServicio {
         try {
             objConectar.conectar();
             con = objConectar.getConnection();
-            CallableStatement sentencia = con.prepareCall("select servicio.codigoser,habitacion.numerohab,hospedaje.dnihue,tipo_servicio.nombre, servicio.descripcion,servicio.fecha,tipo_servicio.codigots from servicio \n" +
+            CallableStatement sentencia = con.prepareCall("select servicio.codigoser,habitacion.numerohab,hospedaje.dnihue,tipo_servicio.nombre, servicio.descripcion,servicio.fecha,tipo_servicio.codigots,servicio.costototal from servicio \n" +
             "inner join tipo_servicio on tipo_servicio.codigots=servicio.codigots\n" +
             "inner join hospedaje on servicio.numerohos=hospedaje.numerohos \n" +
             "inner join habitacion on hospedaje.numerohab=habitacion.numerohab\n" +

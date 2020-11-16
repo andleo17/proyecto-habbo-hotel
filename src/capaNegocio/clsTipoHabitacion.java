@@ -169,7 +169,7 @@ public class clsTipoHabitacion {
         try {
             objConectar.conectar();
             con = objConectar.getConnection();
-            CallableStatement sentencia = con.prepareCall("select th.nombre from tipo_habitacion th inner join habitacion h on th.codigoth = h.codigoth where th.vigencia= true and h.estado='D' group by 1 order by nombre asc");
+            CallableStatement sentencia = con.prepareCall("select th.nombre from tipo_habitacion th inner join habitacion h on th.codigoth = h.codigoth where th.vigencia= true and h.estado='D' and h.vigencia=true group by 1 order by nombre asc");
             rs = sentencia.executeQuery();
             return rs ; //el codigo es del alias del CODIGO FROM
         } catch (Exception e) {

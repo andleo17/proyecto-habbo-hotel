@@ -65,6 +65,23 @@ public class clsHabitacion {
         
     }
     
+    public void modificarHabit(Integer num, String desc, String esta, Boolean vig, Integer codth) throws Exception {
+        try {
+            objConectar.conectar();
+            con = objConectar.getConnection();
+            CallableStatement sentencia = con.prepareCall("update habitacion set descripcion=?,estado=?,vigencia=?,codigoth=? where numerohab=?");
+                
+                sentencia.setString(1, desc);
+                sentencia.setString(2,esta);
+                sentencia.setBoolean(3, vig);
+                sentencia.setInt(4,codth);
+                sentencia.setInt(5, num);
+                sentencia.executeUpdate();  
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+    
     public ResultSet listarHab() throws Exception {
         try {
             objConectar.conectar();

@@ -5,6 +5,7 @@
  */
 package capaPresentacion;
 
+import capaNegocio.clsHospedaje;
 import capaNegocio.clsServicio;
 import java.sql.ResultSet;
 import java.util.Vector;
@@ -25,6 +26,7 @@ public class jdGestionarServi extends javax.swing.JDialog {
      */
     
     clsServicio objServicio = new clsServicio();
+    clsHospedaje objHosp = new clsHospedaje();
     int codServicio=0; 
     
     public jdGestionarServi(java.awt.Frame parent, boolean modal) {
@@ -340,8 +342,9 @@ public class jdGestionarServi extends javax.swing.JDialog {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         try {
-            listarServicios();
+//            listarServicios();
             listarTipoServicio();
+            cboHab.removeAllItems();
         } catch (Exception ex) {
             Logger.getLogger(jdGestionarServi.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -364,6 +367,14 @@ public class jdGestionarServi extends javax.swing.JDialog {
                     ResultSet rs = objServicio.listarCliente(txtDni.getText());
                     if(rs.next()){
                         lblNombre.setText(rs.getString("nombres")+" "+ rs.getString("apellidos"));
+                        listarServicioCliente(txtDni.getText());
+                        ResultSet habita = objHosp.listarHabitacionesHosp(txtDni.getText());
+                        while(habita.next()) {
+                            cboHab.addItem(habita.getString("numerohab"));
+                        }
+                        cboHab.setSelectedIndex(0);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "El cliente no existe");
                     }
 
                 }else{
@@ -393,9 +404,11 @@ public class jdGestionarServi extends javax.swing.JDialog {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         //Registrar un servicio
-        float total= (float)spnCantidad.getValue() *Float.parseFloat(lblprecio.getText());
+        float total= (int)spnCantidad.getValue() *Float.parseFloat(lblprecio.getText());
         try {
             objServicio.registarServicio(txaDescripcion.getText(),total , objServicio.buscartipo(cboservicio.getSelectedItem().toString()), objServicio.buscarHospedaje(Integer.parseInt(cboHab.getSelectedItem().toString()),txtDni.getText()));
+            JOptionPane.showMessageDialog(this, "Servicio registrado");
+            listarServicioCliente(txtDni.getText());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
@@ -403,7 +416,7 @@ public class jdGestionarServi extends javax.swing.JDialog {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // Modificar Servicio
-        float total= (float)spnCantidad.getValue() *Float.parseFloat(lblprecio.getText());
+        float total= (int)spnCantidad.getValue() *Float.parseFloat(lblprecio.getText());
         try {
             if(codServicio==0){
                 JOptionPane.showMessageDialog(this, "Selecciones un servicio a modificar");
@@ -503,6 +516,7 @@ public class jdGestionarServi extends javax.swing.JDialog {
         cboservicio.setSelectedIndex(-1);
         txaDescripcion.setText("");
         spnCantidad.setValue("0");
+        cboHab.removeAllItems();
     }
     
     public void listarTipoServicio(){
@@ -563,7 +577,7 @@ public class jdGestionarServi extends javax.swing.JDialog {
                 registro.add(3,rs.getString("nombre"));
                 registro.add(4,rs.getString("descripcion"));
                 registro.add(5,rs.getString("fecha"));
-                registro.add(6,rs.getFloat("precio"));
+                registro.add(6,rs.getFloat("costototal"));
                 modelo.addRow(registro);     
             }
             
@@ -597,13 +611,13 @@ public class jdGestionarServi extends javax.swing.JDialog {
                 registro.add(3,rs.getString("nombre"));
                 registro.add(4,rs.getString("descripcion"));
                 registro.add(5,rs.getString("fecha"));
-                registro.add(6,rs.getFloat("precio"));
+                registro.add(6,rs.getFloat("costototal"));
                 modelo.addRow(registro);     
             }
             
             tblHabitacion.setModel(modelo);
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }    
     }
     

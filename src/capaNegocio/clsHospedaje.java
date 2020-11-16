@@ -109,7 +109,7 @@ public class clsHospedaje {
     try {
         objConectar.conectar();
         con = objConectar.getConnection();
-        CallableStatement sentencia = con.prepareCall("select huesped.nombres,huesped.apellidos,hospedaje.fechaini,hospedaje.fechafin-hospedaje.fechaini as dias\n" +
+        CallableStatement sentencia = con.prepareCall("select huesped.nombres,huesped.apellidos,hospedaje.fechaini,hospedaje.fechafin-hospedaje.fechaini+1 as dias\n" +
         "from huesped inner join hospedaje on huesped.dnihue=hospedaje.dnihue where hospedaje.dnihue=? and hospedaje.estado=true");
         sentencia.setString(1, dni);
         rs= sentencia.executeQuery();
@@ -243,8 +243,25 @@ public void anularHospedaje(int cod) throws Exception {
     try {
         objConectar.conectar();
         con = objConectar.getConnection();
+        con.setAutoCommit(false);
         strSQL = "update hospedaje set estado=false where numerohos='" +cod+"'";
         objConectar.ejecutarBD(strSQL);
+        strSQL = "update habitacion set estado='D' where numerohab=(select numerohab from hospedaje where numerohos='"+cod+"')";
+        objConectar.ejecutarBD(strSQL);
+        con.commit();
+    } catch (Exception e) {
+        con.rollback();
+        throw e;
+    }
+}
+
+public ResultSet listarHabitacionesHosp(String dni) throws Exception {
+    try {
+        objConectar.conectar();
+        con = objConectar.getConnection();
+        strSQL="select numerohab from hospedaje  where dnihue='"+dni+"' and estado=true";
+        rs = objConectar.consultarBD(strSQL);
+        return rs;
     } catch (Exception e) {
         throw e;
     }

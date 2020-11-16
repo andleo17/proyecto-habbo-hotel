@@ -377,7 +377,16 @@ public class jdHabitacion extends javax.swing.JDialog {
     }
     
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-
+        try {
+            String est="";
+            if(cmbEstado.getSelectedItem().equals("Disponible")) est="D";
+                   if(cmbEstado.getSelectedItem().equals("Ocupada")) est="O";
+                   if(cmbEstado.getSelectedItem().equals("Mantenimiento")) est="M";
+            objHab.modificarHabit(Integer.parseInt(txtNumeroHab.getText()),txtDescripcion.getText(),est,chkVigencia.isSelected(),objTipohab.retornarCodigoTipoHabitacion(cmbTipoHab.getSelectedItem().toString()));
+            JOptionPane.showMessageDialog(this, "Habitación modificada");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -483,7 +492,7 @@ public class jdHabitacion extends javax.swing.JDialog {
         DefaultComboBoxModel modelTipoHab = new DefaultComboBoxModel() ;
         cmbTipoHab.setModel(modelTipoHab);
         try {
-            rsTipoHab =  objTipohab.listarTiphabvigente();
+            rsTipoHab =  objTipohab.listartipohab();
             while ( rsTipoHab.next()) {
                 modelTipoHab.addElement(rsTipoHab.getString("nombre"));
             }
