@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class clsHospedaje {
     clsJDBCConexion objConectar = new clsJDBCConexion();
-    //String strSQL;
+    String strSQL;
     ResultSet rs = null;
     Connection con;
     Statement sent;
@@ -31,7 +31,7 @@ public class clsHospedaje {
         return 0;
     }
     
-    public boolean registrarHospedaje(Integer num, Date fecIni,String mot,Double cos, Integer numHab, String dniHue,String dniEmp) throws Exception{
+    public boolean registrarHospedaje(Integer num, java.util.Date fecIni,String mot,Double cos, Integer numHab, String dniHue,String dniEmp) throws Exception{
         try {
             boolean valor = false;
             boolean registrar = false;
@@ -102,10 +102,7 @@ public class clsHospedaje {
         "from huesped inner join hospedaje on huesped.dnihue=hospedaje.dnihue where hospedaje.dnihue=? and hospedaje.estado=true");
         sentencia.setString(1, dni);
         rs= sentencia.executeQuery();
-        while(rs.next()){
-            return rs;
-        }
-        return null;
+        return rs;
     } catch (Exception e) {
         throw new Exception (e.getMessage());
     }   
@@ -163,7 +160,7 @@ public class clsHospedaje {
         sentencia.setString(1, dni);
         rs=sentencia.executeQuery();
         while(rs.next()){
-            rs.getFloat("costo");
+            return rs.getFloat("costo");
         }
     } catch (Exception e) {
         throw new Exception (e.getMessage());
@@ -184,7 +181,7 @@ public Float CostoTHabCliente (String dni) throws Exception{
         sentencia.setString(1, dni);
         rs=sentencia.executeQuery();
         while(rs.next()){
-            rs.getFloat("costo");
+            return rs.getFloat("costo");
         }
         return null;
     } catch (Exception e) {
@@ -207,7 +204,6 @@ public boolean finalizarHospedaje(String dni) throws Exception{
         sentencia1.setString(1, dni);
         sentencia1.executeUpdate();
         CallableStatement sentencia2 = con.prepareCall("update servicio set estadopago = true, estado=false where numerohos=(select numerohos from hospedaje where dnihue='"+dni+"' and estado=true and estadopago=false)");
-        sentencia2.setString(1, dni);
         sentencia2.executeUpdate();
         CallableStatement sentencia3 = con.prepareCall("update hospedaje set estadopago = true, estado=false where dnihue=? and estado=true and estadopago=false");
         sentencia3.setString(1, dni);
@@ -218,6 +214,18 @@ public boolean finalizarHospedaje(String dni) throws Exception{
         throw new Exception (e.getMessage());
     }
         return false;
+}
+
+public ResultSet listarHospPendienteS() throws Exception {
+    try {
+        objConectar.conectar();
+        con = objConectar.getConnection();
+        strSQL= "select h.numerohos, h.fechaini, h.numerohab, th.nombre,hu.nombres || ' ' || hu.apellidos as nom_huesped from hospedaje h inner join habitacion ha on h.numerohab = ha.numerohab inner join tipo_habitacion th on th.codigoth = ha.codigoth inner join huesped hu on hu.dnihue = h.dnihue where estadopago = false";
+        rs = objConectar.consultarBD(strSQL);
+        return rs;
+    } catch (Exception e) {
+        throw e;
+    }
 }
 
 }
