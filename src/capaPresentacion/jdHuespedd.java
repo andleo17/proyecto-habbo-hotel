@@ -471,6 +471,7 @@ clsHuesped objHuesped = new clsHuesped();
                 JOptionPane.showMessageDialog(this," Huesped modificado ");
             }}
             catch(Exception e){
+                JOptionPane.showMessageDialog(this, e.getMessage());
             }
     }//GEN-LAST:event_btnModificarActionPerformed
 

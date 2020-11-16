@@ -73,9 +73,9 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtUsuario" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtContraseña" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtNuevaContraseña" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
+                      <Component id="txtUsuario" alignment="0" pref="176" max="32767" attributes="0"/>
+                      <Component id="txtContraseña" max="32767" attributes="0"/>
+                      <Component id="txtNuevaContraseña" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -128,13 +128,6 @@
             <Property name="text" type="java.lang.String" value="Contrase&#xf1;a:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtContrase&#xf1;a">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Verdana" size="14" style="0"/>
-            </Property>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -143,12 +136,9 @@
             <Property name="text" type="java.lang.String" value="Nueva Contrase&#xf1;a:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNuevaContrase&#xf1;a">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Verdana" size="14" style="0"/>
-            </Property>
-          </Properties>
+        <Component class="javax.swing.JPasswordField" name="txtContrase&#xf1;a">
+        </Component>
+        <Component class="javax.swing.JPasswordField" name="txtNuevaContrase&#xf1;a">
         </Component>
       </SubComponents>
     </Container>

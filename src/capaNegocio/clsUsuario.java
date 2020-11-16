@@ -76,12 +76,12 @@ public class clsUsuario {
         $$
         declare
         begin
-            update usuario set contrasena=usu where nombreusu=usu;
+            update usuario set contrasena=con where nombreusu=usu;
         end;
         $$language'plpgsql'
         */
         //update usuario set contrasena='" + nuevaCon + "' where nombreusu='" + usu + "'
-        strSQL = "select ModificarCotraseña('"+usu+"','"+nuevaCon+"')";
+        strSQL = "select ModificarContraseña('"+usu+"','"+nuevaCon+"')";
         objConectar.consultarBD(strSQL);
     }
 

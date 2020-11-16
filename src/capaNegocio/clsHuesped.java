@@ -65,7 +65,7 @@ public class clsHuesped {
         try{
             objConectar.conectar();
             con = objConectar.getConnection();
-            CallableStatement sentencia = con.prepareCall("update huesped set nombres=?,apellidos=?,ciudad=?, telefono=?',correo=?,estado=? where dnihue=?");
+            CallableStatement sentencia = con.prepareCall("update huesped set nombres=?,apellidos=?,ciudad=?, telefono=?,correo=?,estado=? where dnihue=?");
             sentencia.setString(1, nomb);
             sentencia.setString(2, apell);
             sentencia.setString(3, ciu);

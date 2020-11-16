@@ -485,7 +485,7 @@ clEmpleado objem = new clEmpleado();
                 }else  {
                     sexo = "femenino";
                 }
-                model.addRow(new Object []{rsLista.getInt("dniemp"),rsLista.getString("nombres"),rsLista.getString("apellidos"),rsLista.getDate("fechanac"),sexo ,rsLista.getString("direccion"),rsLista.getString("telefono"), vigencia});
+                model.addRow(new Object []{rsLista.getString("dniemp"),rsLista.getString("nombres"),rsLista.getString("apellidos"),rsLista.getDate("fechanac"),sexo ,rsLista.getString("direccion"),rsLista.getString("telefono"), vigencia});
                 lbltotal.setText(String.valueOf(objem.totalEmpleados()));
             }
         } catch (Exception e) {
